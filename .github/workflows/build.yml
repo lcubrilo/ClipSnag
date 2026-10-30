@@ -94,6 +94,15 @@ jobs:
         with:
           name: emulator-results
           path: ci-out/
+      - name: Publish test results to the ci-results branch
+        if: always()
+        run: |
+          cd ci-out
+          git init -q -b ci-results
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          echo "run ${{ github.run_number }} @ ${GITHUB_SHA::7}" > RUN.txt
+          git add -A && git commit -q -m "emulator results run ${{ github.run_number }}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-results
 
   release:
     needs: emulator
