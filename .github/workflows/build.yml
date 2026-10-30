@@ -1,0 +1,118 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install yt-dlp pytest
+      - run: pytest -q tests
+
+  apk:
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      VERSION_CODE: ${{ github.run_number }}
+      VERSION_NAME: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || format('0.1.{0}', github.run_number) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-python@v5   # Chaquopy needs a matching build Python
+        with:
+          python-version: "3.13"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.14.3"
+      - name: Signing key
+        env:
+          KEYSTORE_B64: ${{ secrets.KEYSTORE_B64 }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then
+            echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+            echo "KEYSTORE_FILE=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
+          else
+            echo "::warning::KEYSTORE_B64 secret not set, release APK is debug-signed"
+          fi
+      - name: Build
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: clipsnag
+        run: gradle --no-daemon :app:assembleRelease :app:assembleDebug
+      - name: Collect
+        run: |
+          mkdir dist
+          cp app/build/outputs/apk/release/*.apk "dist/ClipSnag-${VERSION_NAME}.apk"
+          cp app/build/outputs/apk/debug/*.apk dist/ClipSnag-debug.apk
+          ls -la dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk
+          path: dist/
+
+  emulator:
+    needs: apk
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: apk
+          path: dist
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: bash ci/emulator_test.sh dist/ClipSnag-debug.apk
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: emulator-results
+          path: ci-out/
+
+  release:
+    needs: emulator
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: apk
+          path: dist
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          APK=$(ls dist/ClipSnag-*.apk | grep -v debug)
+          VER=$(basename "$APK" .apk | sed 's/ClipSnag-//')
+          TAG="v$VER"
+          cp "$APK" dist/ClipSnag.apk
+          gh release create "$TAG" dist/ClipSnag.apk "$APK" --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" --title "ClipSnag $VER" \
+            --notes "Instaliraj **ClipSnag.apk** na telefon (Android 10+). Automatski build iz ${GITHUB_SHA::7}." \
+            || gh release upload "$TAG" dist/ClipSnag.apk "$APK" --clobber --repo "$GITHUB_REPOSITORY"

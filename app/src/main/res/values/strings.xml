@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClipSnag</string>
+    <string name="tile_label">Skini video</string>
+    <string name="share_label">Skini sa ClipSnag</string>
+</resources>
