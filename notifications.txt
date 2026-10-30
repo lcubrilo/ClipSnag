@@ -1,0 +1,80 @@
+    NotificationRecord(0x0ccfd720: pkg=io.github.lcubrilo.clipsnag user=UserHandle{0} id=2147483647 tag=ranker_group importance=4 key=0|io.github.lcubrilo.clipsnag|2147483647|ranker_group|10192|ranker_group: Notification(channel=links shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x710 color=0x00000000 groupKey=ranker_group vis=PRIVATE))
+      uid=10192 userId=0
+      opPkg=io.github.lcubrilo.clipsnag
+      icon=Icon(typ=RESOURCE pkg=io.github.lcubrilo.clipsnag id=0x7f020002)
+      flags=0x710
+      originalFlags=0x710
+      pri=0
+      key=0|io.github.lcubrilo.clipsnag|2147483647|ranker_group|10192|ranker_group
+      seen=true
+      groupKey=0|io.github.lcubrilo.clipsnag|g:ranker_group
+      notification=
+            fullscreenIntent=null
+            contentIntent=PendingIntent{aca88d9: PendingIntentRecord{2fe0608 io.github.lcubrilo.clipsnag startActivity}}
+            deleteIntent=null
+            number=0
+            groupAlertBehavior=2
+--
+                android.appInfo=ApplicationInfo (ApplicationInfo{ec4929e io.github.lcubrilo.clipsnag})
+            }
+      publicNotification=
+            None
+--
+    NotificationRecord(0x0292c17f: pkg=io.github.lcubrilo.clipsnag user=UserHandle{0} id=157822698 tag=null importance=4 key=0|io.github.lcubrilo.clipsnag|157822698|null|10192: Notification(channel=links shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x10 color=0x00000000 category=recommendation actions=2 vis=PRIVATE))
+      uid=10192 userId=0
+      opPkg=io.github.lcubrilo.clipsnag
+      icon=Icon(typ=RESOURCE pkg=io.github.lcubrilo.clipsnag id=0x7f020002)
+      flags=0x10
+      originalFlags=0x10
+      pri=0
+      key=0|io.github.lcubrilo.clipsnag|157822698|null|10192
+      seen=true
+      groupKey=0|io.github.lcubrilo.clipsnag|g:ranker_group
+      notification=
+            fullscreenIntent=null
+            contentIntent=PendingIntent{6ab454c: PendingIntentRecord{7d7bd9f io.github.lcubrilo.clipsnag startActivity (allowlist: 83014c7:+30s0ms/0/NOTIFICATION_SERVICE/NotificationManagerService)}}
+            deleteIntent=null
+            number=0
+            groupAlertBehavior=0
+--
+                [0] "Skini" -> PendingIntent{ad1d995: PendingIntentRecord{7d7bd9f io.github.lcubrilo.clipsnag startActivity (allowlist: 83014c7:+30s0ms/0/NOTIFICATION_SERVICE/NotificationManagerService)}}
+                [1] "Ne skini" -> PendingIntent{9e33aaa: PendingIntentRecord{98d6b3e io.github.lcubrilo.clipsnag broadcastIntent (allowlist: 83014c7:+30s0ms/0/NOTIFICATION_SERVICE/NotificationManagerService)}}
+              }
+            extras={
+                android.title=String (Video link spreman za skidanje)
+--
+                android.appInfo=ApplicationInfo (ApplicationInfo{b1bf69b io.github.lcubrilo.clipsnag})
+                android.bigText=String (https://www.youtube.com/watch?v=jNQXAC9IVRw)
+            }
+      publicNotification=
+--
+    NotificationRecord(0x06ed6a38: pkg=io.github.lcubrilo.clipsnag user=UserHandle{0} id=86205366 tag=null importance=3 key=0|io.github.lcubrilo.clipsnag|86205366|null|10192: Notification(channel=done shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x10 color=0x00000000 actions=2 vis=PRIVATE))
+      uid=10192 userId=0
+      opPkg=io.github.lcubrilo.clipsnag
+      icon=Icon(typ=RESOURCE pkg=io.github.lcubrilo.clipsnag id=0x7f020002)
+      flags=0x10
+      originalFlags=0x10
+      pri=0
+      key=0|io.github.lcubrilo.clipsnag|86205366|null|10192
+      seen=true
+      groupKey=0|io.github.lcubrilo.clipsnag|g:ranker_group
+      notification=
+            fullscreenIntent=null
+            contentIntent=PendingIntent{8c37a11: PendingIntentRecord{bb61d30 io.github.lcubrilo.clipsnag startActivity (allowlist: 83014c7:+30s0ms/0/NOTIFICATION_SERVICE/NotificationManagerService)}}
+            deleteIntent=null
+            number=0
+            groupAlertBehavior=0
+--
+                [0] "Otvori" -> PendingIntent{4925776: PendingIntentRecord{bb61d30 io.github.lcubrilo.clipsnag startActivity (allowlist: 83014c7:+30s0ms/0/NOTIFICATION_SERVICE/NotificationManagerService)}}
+                [1] "Podeli" -> PendingIntent{4396177: PendingIntentRecord{c8f3da9 io.github.lcubrilo.clipsnag startActivity (allowlist: 83014c7:+30s0ms/0/NOTIFICATION_SERVICE/NotificationManagerService)}}
+              }
+            extras={
+                android.title=String (Preuzeto ✓)
+--
+                android.appInfo=ApplicationInfo (ApplicationInfo{12af1e4 io.github.lcubrilo.clipsnag})
+                android.bigText=String (Download/ClipSnag/miloš milaković DfHixwjK8Bx.mp4)
+            }
+      publicNotification=
+--
+    NotificationRecord(0x0f54a64d: pkg=io.github.lcubrilo.clipsnag user=UserHandle{0} id=157314816 tag=null importance=3 key=0|io.github.lcubrilo.clipsnag|157314816|null|10192: Notification(channel=done shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x10 color=0x00000000 actions=2 vis=PRIVATE))
+      uid=10192 userId=0

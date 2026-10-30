@@ -1,0 +1,21 @@
+10-30 16:54:47.541  3325  5392 I python.stdout: CLIPSNAG_SELFTEST start https://www.youtube.com/watch?v=jNQXAC9IVRw
+10-30 16:54:49.519  3325  5392 W python.stderr: ERROR: [youtube] jNQXAC9IVRw: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+10-30 16:54:49.520  3325  5392 W python.stderr: Traceback (most recent call last):
+10-30 16:54:49.520  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/requirements/yt_dlp/YoutubeDL.py", line 1728, in wrapper
+10-30 16:54:49.521  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/requirements/yt_dlp/YoutubeDL.py", line 1863, in __extract_info
+10-30 16:54:49.521  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/requirements/yt_dlp/extractor/common.py", line 764, in extract
+10-30 16:54:49.521  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/requirements/yt_dlp/extractor/youtube/_video.py", line 4083, in _real_extract
+10-30 16:54:49.521  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/requirements/yt_dlp/extractor/common.py", line 1271, in raise_no_formats
+10-30 16:54:49.521  3325  5392 W python.stderr: yt_dlp.utils.ExtractorError: [youtube] jNQXAC9IVRw: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+10-30 16:54:49.521  3325  5392 W python.stderr:  
+10-30 16:54:49.521  3325  5392 W python.stderr: During handling of the above exception, another exception occurred:
+10-30 16:54:49.521  3325  5392 W python.stderr:  
+10-30 16:54:49.521  3325  5392 W python.stderr: Traceback (most recent call last):
+10-30 16:54:49.522  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/app/clipsnag/components.py", line 248, in selftest
+10-30 16:54:49.522  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/app/clipsnag/core.py", line 168, in get_info
+10-30 16:54:49.522  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/requirements/yt_dlp/YoutubeDL.py", line 1717, in extract_info
+10-30 16:54:49.522  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/requirements/yt_dlp/YoutubeDL.py", line 1746, in wrapper
+10-30 16:54:49.522  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/requirements/yt_dlp/YoutubeDL.py", line 1162, in report_error
+10-30 16:54:49.522  3325  5392 W python.stderr:   File "/data/data/io.github.lcubrilo.clipsnag/files/chaquopy/AssetFinder/requirements/yt_dlp/YoutubeDL.py", line 1100, in trouble
+10-30 16:54:49.522  3325  5392 W python.stderr: yt_dlp.utils.DownloadError: ERROR: [youtube] jNQXAC9IVRw: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+10-30 16:54:49.522  3325  5392 I python.stdout: CLIPSNAG_SELFTEST failed YouTube traži potvrdu da nisi bot. To se dešava na VPN-u ili javnom WiFi-ju; probaj preko mobilnog interneta ili pritisni „Ažuriraj yt-dlp“.

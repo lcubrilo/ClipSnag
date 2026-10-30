@@ -1,0 +1,3 @@
+https://www.youtube.com/watch?v=jNQXAC9IVRw => 10-30 16:54:49.522  3325  5392 I python.stdout: CLIPSNAG_SELFTEST failed YouTube traži potvrdu da nisi bot. To se dešava na VPN-u ili javnom WiFi-ju; probaj preko mobilnog interneta ili pritisni „Ažuriraj yt-dlp“.
+https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4 => 10-30 16:54:52.127  3325  5590 I python.stdout: CLIPSNAG_DONE Big_Buck_Bunny_360_10s_1MB.mp4 995536
+https://www.instagram.com/reel/DfHixwjK8Bx/ => 10-30 16:54:59.557  3325  5746 I python.stdout: CLIPSNAG_DONE miloš milaković DfHixwjK8Bx.mp4 14651651

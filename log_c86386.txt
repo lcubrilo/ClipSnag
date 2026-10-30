@@ -1,0 +1,5 @@
+10-30 16:54:49.855  3325  5572 I python.stdout: CLIPSNAG_SELFTEST start https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4
+10-30 16:54:51.084  3325  5572 I python.stdout: CLIPSNAG_SELFTEST formats [{"format_id": "mp4", "ext": "mp4", "vcodec": null, "acodec": null, "height": null, "width": null, "protocol": "https", "tbr": null, "filesize": null}]
+10-30 16:54:51.084  3325  5572 I python.stdout: CLIPSNAG_SELFTEST options [{"kind": "single", "video": "mp4", "audio": null, "remux": false, "ext": "mp4", "height": null, "size": 0, "label": "Najbolji kvalitet \u00b7 MP4"}]
+10-30 16:54:51.099  3325  5572 I python.stdout: CLIPSNAG_SELFTEST started {"kind": "single", "video": "mp4", "audio": null, "remux": true, "ext": "mp4", "height": null, "size": 0, "label": "Najbolji kvalitet \u00b7 MP4"}
+10-30 16:54:52.127  3325  5590 I python.stdout: CLIPSNAG_DONE Big_Buck_Bunny_360_10s_1MB.mp4 995536
