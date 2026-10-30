@@ -232,6 +232,11 @@ def _afamily(f):
     return None
 
 
+def _res_label(h, w=None):
+    """'720p' for 1280x720 and for vertical 720x1280 alike."""
+    return f"{min(h, w) if w else h}p"
+
+
 def _best(fmts, key):
     return max(fmts, key=key) if fmts else None
 
@@ -264,6 +269,10 @@ def build_options(info, max_options=8):
     }
 
     heights = sorted({f.get("height") for f in combined + vonly if f.get("height")}, reverse=True)
+    widths = {}
+    for f in combined + vonly:
+        if f.get("height") and f.get("width"):
+            widths[f["height"]] = f["width"]
     options = []
     for h in heights:
         # Prefer a ready-made file with sound (no muxing needed).
@@ -293,7 +302,7 @@ def build_options(info, max_options=8):
         else:
             continue
         fps_txt = f"{int(fps)}" if fps and fps > 30 else ""
-        opt["label"] = " · ".join(x for x in (f"{h}p{fps_txt}", opt["ext"].upper(),
+        opt["label"] = " · ".join(x for x in (f"{_res_label(h, widths.get(h))}{fps_txt}", opt["ext"].upper(),
                                                _fmt_size(opt["size"])) if x)
         options.append(opt)
         if len(options) >= max_options:
@@ -304,10 +313,15 @@ def build_options(info, max_options=8):
         cands = combined or [f for f in formats if _has_video(f)]
         if cands:
             f = _best(cands, lambda f: (f.get("tbr") or 0, _size(f)))
+            known = [x for x in formats if x.get("height")]
+            hint = ""
+            if known:
+                top = max(known, key=lambda x: x["height"])
+                hint = f"do {_res_label(top['height'], top.get('width'))}"
             options.append(dict(kind="single", video=f["format_id"], audio=None, remux=_is_hls(f),
                                 ext="mp4" if _is_hls(f) else (f.get("ext") or "mp4"),
                                 height=f.get("height"), size=_size(f),
-                                label=" · ".join(x for x in ("Najbolji kvalitet", (f.get("ext") or "mp4").upper(),
+                                label=" · ".join(x for x in ("Najbolji kvalitet", hint, (f.get("ext") or "mp4").upper(),
                                                              _fmt_size(_size(f))) if x)))
 
     a = best_audio.get("mp4") or best_audio.get("webm") or _best(aonly, aud_key)

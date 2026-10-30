@@ -61,3 +61,18 @@ def test_hls_single_is_remuxed():
 
 def test_safe_filename():
     assert core.output_name(yt_like_info(), dict(height=1080, ext="mp4")) == "My video test [1080p].mp4"
+
+
+def test_vertical_label_and_hint():
+    info = dict(id="r", title="t", formats=[
+        dict(format_id="1", ext="mp4", url="u", protocol="https"),
+        dict(format_id="dv", ext="mp4", vcodec="vp09.00", acodec="none", height=1280, width=720, url="u", protocol="https"),
+        dict(format_id="da", ext="m4a", vcodec="none", acodec="mp4a.40.5", url="u", protocol="https"),
+    ])
+    opts = core.build_options(info)
+    assert opts[0]["video"] == "1" and "do 720p" in opts[0]["label"], opts
+    assert opts[-1]["kind"] == "audio"
+    yt = core.build_options(dict(id="s", title="t", formats=[
+        dict(format_id="v", ext="mp4", vcodec="avc1", acodec="none", height=1920, width=1080, url="u", protocol="https"),
+        dict(format_id="a", ext="m4a", vcodec="none", acodec="mp4a", url="u", protocol="https")]))
+    assert yt[0]["label"].startswith("1080p"), yt

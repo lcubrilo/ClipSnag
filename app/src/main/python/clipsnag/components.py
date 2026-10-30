@@ -254,7 +254,9 @@ def selftest(ctx, url):
         print("CLIPSNAG_SELFTEST options", json.dumps(opts), flush=True)
         pref = [o for o in opts if o["kind"] != "audio" and (o.get("height") or 0) <= 720] or opts
         merge = [o for o in pref if o["kind"] == "merge"]
-        opt = (merge or pref)[0]
+        opt = dict((merge or pref)[0])
+        if url.endswith(".mp4"):
+            opt["remux"] = True  # exercise the MediaMuxer path on a known-good file
         i = droid.component_intent(ctx, "DownloadService")
         i.putExtra("url", url)
         i.putExtra("title", info.get("title") or "selftest")
