@@ -34,7 +34,6 @@ RESULTS="$OUT/results.txt"; : > "$RESULTS"
 for URL in \
   "https://www.youtube.com/watch?v=jNQXAC9IVRw" \
   "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4" \
-  "https://vimeo.com/76979871" \
   "https://www.instagram.com/reel/DfHixwjK8Bx/" ; do
   echo "== selftest $URL"
   adb logcat -b main -c

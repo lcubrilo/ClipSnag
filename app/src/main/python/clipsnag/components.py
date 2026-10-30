@@ -144,6 +144,7 @@ class MainActivity(static_proxy(Activity)):
         title = TextView(self)
         title.setText("ClipSnag")
         title.setTextSize(30.0)
+        title.setPadding(0, int(24 * dp), 0, 0)
         root.addView(title)
 
         how = TextView(self)
@@ -246,6 +247,10 @@ def selftest(ctx, url):
         droid.show_link_notification(ctx, url)
         info = core.get_info(url)
         opts = core.build_options(info)
+        print("CLIPSNAG_SELFTEST formats", json.dumps([
+            {k: f.get(k) for k in ("format_id", "ext", "vcodec", "acodec", "height", "width",
+                                   "protocol", "tbr", "filesize")}
+            for f in (info.get("formats") or [])]), flush=True)
         print("CLIPSNAG_SELFTEST options", json.dumps(opts), flush=True)
         pref = [o for o in opts if o["kind"] != "audio" and (o.get("height") or 0) <= 720] or opts
         merge = [o for o in pref if o["kind"] == "merge"]

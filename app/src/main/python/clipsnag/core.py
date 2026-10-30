@@ -412,11 +412,20 @@ def download_parts(info, option, workdir, on_progress=None, cancel=None):
 
 
 def _clean_error(msg):
-    msg = re.sub(r"^ERROR:\s*", "", msg.strip())
-    msg = re.sub(r"\x1b\[[0-9;]*m", "", msg)
-    if "login" in msg.lower() or "cookies" in msg.lower():
-        msg = "Sajt traži prijavu (privatan ili ograničen sadržaj). " + msg
-    return msg[:300]
+    msg = re.sub(r"\x1b\[[0-9;]*m", "", msg.strip())
+    msg = re.sub(r"^(ERROR:\s*)?(\[[\w:]+\]\s*)?([\w-]+:\s+)?", "", msg)
+    low = msg.lower()
+    if "confirm you" in low and "bot" in low:
+        return ("YouTube traži potvrdu da nisi bot. To se dešava na VPN-u ili javnom WiFi-ju; "
+                "probaj preko mobilnog interneta ili pritisni „Ažuriraj yt-dlp“.")
+    if "private" in low or "login" in low or "logged-in" in low or "cookies" in low:
+        return "Ovaj sadržaj je privatan ili sajt traži prijavu, pa ne može da se skine bez naloga."
+    if "unsupported url" in low:
+        return "Ovaj sajt nije podržan."
+    if "unable to download" in low or "timed out" in low or "network" in low:
+        return "Problem sa mrežom. Proveri internet i probaj ponovo."
+    msg = re.split(r"\s(?:See|Use)\s", msg)[0]
+    return msg[:240]
 
 
 def friendly_error(exc):

@@ -7,7 +7,7 @@ import traceback
 import zlib
 
 from java import cast, dynamic_proxy, jclass, jint
-from java.lang import Integer, Runnable
+from java.lang import Runnable
 
 from android.app import Notification, NotificationChannel, NotificationManager, PendingIntent
 from android.content import ClipboardManager, ContentValues, Context, Intent
@@ -274,7 +274,6 @@ def save_to_downloads(ctx, src_path, name):
     cv.put(MediaStore.MediaColumns.DISPLAY_NAME, name)
     cv.put(MediaStore.MediaColumns.MIME_TYPE, mime)
     cv.put(MediaStore.MediaColumns.RELATIVE_PATH, f"{Environment.DIRECTORY_DOWNLOADS}/{FOLDER}")
-    cv.put(MediaStore.MediaColumns.IS_PENDING, Integer.valueOf(1))
     uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, cv)
     if uri is None:
         raise RuntimeError("ne mogu da napravim fajl u Download folderu")
@@ -283,9 +282,6 @@ def save_to_downloads(ctx, src_path, name):
         fd = pfd.detachFd()
         with open(src_path, "rb") as src, os.fdopen(fd, "wb") as dst:
             shutil.copyfileobj(src, dst, 1024 * 1024)
-        done = ContentValues()
-        done.put(MediaStore.MediaColumns.IS_PENDING, Integer.valueOf(0))
-        resolver.update(uri, done, None, None)
     except Exception:
         resolver.delete(uri, None, None)
         raise
